@@ -1,6 +1,8 @@
 Walkable-App
 ============
 
+Author: <a href="http://tricedesigns.com" target="_blank">Andrew Trice</a> - <a href="http://www.twitter.com/andytrice" target="_blank">@andytrice</a>  
+
 Walkable Restaurants provides you with an easy way to find a bite to eat or refreshing drink anywhere in the US. Either select a type of cuisine, or enter a search phrase, and the Walkable Restaurants app will find destinations that are nearby.
 Only destinations near your current location will be returned in your search result. If we are able to calculate travel times based upon walking and train schedules, then we will only return destinations within a 20-minute walk. If we are not able to calculate walk time, only destinations within 2.5 miles of your current location will be displayed. 
 
