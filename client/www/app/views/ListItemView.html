@@ -1,0 +1,42 @@
+
+<% if (travel_time_seconds >= 0) { %>
+    <div id="bar" style="width:<%= (travel_time_seconds / 12) %>%; border-top: 1px solid <%=  __svgColor  %>;"></div>
+<% } %>
+
+<div id="walker" style="position:absolute; top:50%; right:20px; text-align: center">
+    <div id="wwrapper" style="margin-top:-34px;">
+        <img src="assets/images/walk/<%=  __svgColor  %>.png" />
+
+        <% if (travel_time_seconds >= 0) { %>
+            <div id="time" style="color:#<%=  __svgColor  %>"><%= travel_time_formatted %></div>
+        <% } else { %>
+            <div id="time" style="color:#<%=  __svgColor  %>"><%= distance %> miles</div>
+        <% } %>
+    </div>
+</div>
+
+<div id="overlay">
+
+    <strong id="name"><%= name %></strong><br/>
+    <%= address %> <span id="distance">
+    <% if (travel_time_seconds >= 0) { %>(<%= distance %> miles)</span><% } %>
+    <br/>
+
+    <% if (typeof(cuisine) != "undefined") { %>
+        <div id="cuisine" style="max-width: 85%"><%= cuisine %><br/></div>
+    <% } %>
+
+    <% if (typeof(rating) != "undefined") { %>
+        Rating:
+        <% for ( var x=0; x<rating; x++ ){ %>
+            <img src="assets/images/star.png" />
+        <% } %>
+    <% } %>
+
+
+    <% if (typeof(price) != "undefined") { %>
+    <% if (typeof(rating) != "undefined") { %>&nbsp;&nbsp;&nbsp;&nbsp;<% } %>
+        Price: <strong class="price"><% for ( var x=0; x<price; x++ ){ %>$<% } %></strong>
+    <% } %>
+
+</div>

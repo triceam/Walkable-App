@@ -1,0 +1,46 @@
+<div id="homeView">
+
+    <div id="wrapper">
+        <div class="well">
+            <h1> Welcome! </h1>
+            <p>Walkable Restaurants is the easiest way to find a great cup of coffee or a bite to eat that is within a reasonable walking distance from your current location.
+                <% if ((typeof(isTablet) != "undefined") && isTablet) { %>
+                    Either select a cuisine or enter a search phase, and you'll be where you want to be, before you know it!
+                <% } %>
+            </p>
+
+            <div style="text-align: center;">
+                <p>
+                    <button id="selectCuisine" class="btn btn-info">Select A Cuisine </button>
+                </p>
+
+                <h4 style="text-align: center">--OR--</h4>
+
+                <p>
+                    <form >
+                        <div class="input-append" style="max-width: 90%;">
+                            <input type="text" id="searchString" placeholder="Enter A Search Phrase…">
+                            <button id="search" type="submit"  class="btn btn-info"><i class="icon-search icon-white"></i> </button>
+                        </div>
+                    </form>
+                </p>
+
+
+                <p style="text-align: left;">
+                    <strong>Search for anything...</strong> A restaurant name (<a href="#" class="searchlink">Starbucks</a>, <a href="#" class="searchlink">McDonald's</a>), a type of location
+                    (<a href="#" class="searchlink">pub</a>, <a href="#" class="searchlink">deli</a>, <a href="#" class="searchlink">bakery</a>),
+                    a type food (<a href="#" class="searchlink">pizza</a>, <a href="#" class="searchlink">subs</a>, or <a href="#" class="searchlink">sushi</a>),
+                    part of a street address (<a href="#" class="searchlink">Main Street</a>, <a href="#" class="searchlink">Union Square</a>), etc...
+                </p>
+            </div>
+
+            <p class="alert alert-info" style="font-weight: bold; margin:0px -20px;">Walking time calculations are only available for CA, FL, &amp; NY.  All other locations will display distance in miles.</p>
+
+
+        </div>
+
+    </div>
+
+
+
+</div>

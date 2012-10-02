@@ -1,0 +1,187 @@
+<div class="gpu" style="background: white;">
+    <div class="header">
+        <h1>Location Details</h1>
+    </div>
+
+    <div class="padded">
+        <h1 class="green shadow"><%= name %></h1>
+
+        <% if (typeof(cuisine) == "string") { %>
+            <h4><%= cuisine %></h4>
+        <% } %>
+
+
+        <strong><%= address %>, <%= locality %>, <%= region %> <%= postcode %></strong><br/>
+
+        <% if (typeof(price) != "undefined") { %>
+            <div><span class="label">Price</span>&nbsp;&nbsp;<strong class="price"><% for ( var x=0; x<price; x++ ){ %>$<% } %></strong></div>
+        <% } %>
+
+        <% if (typeof(rating) != "undefined") { %>
+            <div><span class="label">Rating</span>&nbsp;
+                <% for ( var x=0; x<rating; x++ ){ %>
+                    <img src="assets/images/star.png" />
+                <% } %>
+            </div>
+        <% } %>
+
+        <% if (typeof(tel) != "undefined") { %>
+            <div><span class="label">Phone</span>&nbsp;<a href="tel:<%= tel %>"><%= tel %></a></div>
+        <% } %>
+
+        <% if (typeof(fax) != "undefined") { %>
+            <div><span class="label">Fax</span>&nbsp;<a href="tel:<%= fax %>"><%= fax %></a></div>
+        <% } %>
+
+        <% if (typeof(website) != "undefined") { %>
+            <div><span class="label">Web</span>&nbsp;<a id="website" href="<%= website %>" target="_blank"><%= website %></a></div>
+        <% } %>
+
+        <div style="padding-bottom: 10px;"><span class="label">Distance</span>&nbsp;<%= distance %> miles
+            <% if (travel_time_seconds >= 0) { %>
+                <span class="lightShadow" style="color: #<%= __svgColor %>; font-weight: bold; font-size: +1">(<%= travel_time_formatted %>)</span>
+            <% } %>
+        </div>
+
+    </div>
+</div>
+
+<div class="gpu" style="background: white;">
+    <div id='mapContainer' class="detailMapContainer" style='width:<%= mapSize %>px; height:<%= mapSize/2 %>px'>
+        <div id="map<%= factual_id %>" style="width:100%;height:100%;"></div>
+    </div>
+
+    <div class="toolbar">
+        <button id="directions" class="btn btn-info">Get Directions</button>  &nbsp;&nbsp;
+        <button id="web" class="btn btn-info">Search The Web</button>
+    </div>
+</div>
+
+
+<div class="gpu" style="background: white;">
+    <% if (typeof(parsedHours) != "undefined") { %>
+        <h4 class="padded" style="padding-top: 10px;">Hours:</h4>
+        <div class="data-table" style="display: table;border-bottom:1px solid #DDD;">
+            <%
+            var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+            for ( var x=1; x<=7; x++ ){
+            var day = parsedHours[x] %>
+            <div style="display: table-row;">
+                <div style="display: table-cell;"><%= days[x-1] %></div>
+
+                <% if ( day ) {
+                    for ( var y=0; y<day.length; y++ ){ %>
+
+                        <% if (typeof(day[y]) != "string") { %>
+                            <div style="display: table-cell;">
+                                <% for ( var z=0; z<day[y].length; z++ ){ %>
+                                    <%= day[y][z] %>
+                                    <%= (z == 0) ? "-" : " " %>
+                                <% } %>
+                            </div>
+                        <% } else { %>
+                                <div style="display: table-cell;"><%= day[y] %></div>
+                        <% } %>
+                <% }} else { %>
+                    <div style="display: table-cell;"></div>
+                <% } %>
+            </div>
+            <% } %>
+        </div>
+    <% } %>
+
+
+</div>
+
+<div class="gpu" style="background: white;">
+
+    <h4 class="padded" style="padding-top: 10px;">Known Details:</h4>
+    <div class="data-table" style="display: table;border-bottom:1px solid #DDD;">
+
+        <% if (typeof(payment_cashonly) != "undefined") { %>
+            <div style="display: table-row;"><div style="display: table-cell;" class="amenitiesFirstCol">Cash Only: </div><div style="display: table-cell;"><strong><%= payment_cashonly==true ? "Yes" : "No" %></strong></div></div>
+        <% } %>
+
+
+        <% if (typeof(smoking) != "undefined") { %>
+            <div style="display: table-row;"><div style="display: table-cell;" class="amenitiesFirstCol">Smoking Allowed: </div><div style="display: table-cell;"><strong><%= smoking==true ? "Yes" : "No" %></strong></div></div>
+        <% } %>
+
+
+        <% if (typeof(alcohol) != "undefined") { %>
+        <div style="display: table-row;"><div style="display: table-cell;" class="amenitiesFirstCol">Serves Alcohol: </div><div style="display: table-cell;"><strong><%= alcohol==true ? "Yes" : "No" %></strong></div></div>
+        <% } %>
+
+
+        <% if (typeof(attire) != "undefined") { %>
+        <div style="display: table-row;"><div style="display: table-cell;" class="amenitiesFirstCol">Attire: </div><div style="display: table-cell;"><strong><%= attire %></strong></div></div>
+        <% } %>
+        <% if (typeof(attire_required) != "undefined") { %>
+        <div style="display: table-row;"><div style="display: table-cell;" class="amenitiesFirstCol">Required Attire: </div><div style="display: table-cell;"><strong><%= attire_required %></strong></div></div>
+        <% } %>
+        <% if (typeof(attire_prohibited) != "undefined") { %>
+        <div style="display: table-row;"><div style="display: table-cell;" class="amenitiesFirstCol">Prohibited Attire: </div><div style="display: table-cell;"><strong><%= attire_prohibited %></strong></div></div>
+        <% } %>
+
+        <% if (typeof(reservations) != "undefined") { %>
+        <div style="display: table-row;"><div style="display: table-cell;" class="amenitiesFirstCol">Accepts Reservations: </div><div style="display: table-cell;"><strong><%= reservations==true ? "Yes" : "No" %></strong></div></div>
+        <% } %>
+
+        <% if (typeof(attire_prohibited) != "undefined") { %>
+        <div style="display: table-row;"><div style="display: table-cell;" class="amenitiesFirstCol">Prohibited Attire: </div><div style="display: table-cell;"><strong><%= attire_prohibited %></strong></div></div>
+        <% } %>
+
+        <% if (typeof(room_private) != "undefined") { %>
+        <div style="display: table-row;"><div style="display: table-cell;" class="amenitiesFirstCol">Private Room(s): </div><div style="display: table-cell;"><strong><%= room_private==true ? "Yes" : "No" %></strong></div></div>
+        <% } %>
+
+        <% if (typeof(seating_outdoor) != "undefined") { %>
+        <div style="display: table-row;"><div style="display: table-cell;" class="amenitiesFirstCol">Outdoor Seating: </div><div style="display: table-cell;"><strong><%= seating_outdoor==true ? "Yes" : "No" %></strong></div></div>
+        <% } %>
+
+        <% if (typeof(groups_goodfor) != "undefined") { %>
+        <div style="display: table-row;"><div style="display: table-cell;" class="amenitiesFirstCol">Group Seating: </div><div style="display: table-cell;"><strong><%= groups_goodfor==true ? "Yes" : "No" %></strong></div></div>
+        <% } %>
+
+        <% if (typeof(kids_goodfor) != "undefined") { %>
+        <div style="display: table-row;"><div style="display: table-cell;" class="amenitiesFirstCol">Kid Friendly: </div><div style="display: table-cell;"><strong><%= kids_goodfor==true ? "Yes" : "No" %></strong></div></div>
+        <% } %>
+
+        <% if (typeof(accessible_wheelchair) != "undefined") { %>
+        <div style="display: table-row;"><div style="display: table-cell;" class="amenitiesFirstCol">Wheelchair Accessible: </div><div style="display: table-cell;"><strong><%= accessible_wheelchair==true ? "Yes" : "No" %></strong></div></div>
+        <% } %>
+
+
+        <% if (typeof(meal_cater) != "undefined") { %>
+        <div style="display: table-row;"><div style="display: table-cell;" class="amenitiesFirstCol">Catering Available: </div><div style="display: table-cell;"><strong><%= meal_cater==true ? "Yes" : "No" %></strong></div></div>
+        <% } %>
+
+        <% if (typeof(meal_takeout) != "undefined") { %>
+        <div style="display: table-row;"><div style="display: table-cell;" class="amenitiesFirstCol">Take-out Available: </div><div style="display: table-cell;"><strong><%= meal_takeout==true ? "Yes" : "No" %></strong></div></div>
+        <% } %>
+
+        <% if (typeof(meal_deliver) != "undefined") { %>
+        <div style="display: table-row;"><div style="display: table-cell;" class="amenitiesFirstCol">Delivery Available: </div><div style="display: table-cell;"><strong><%= meal_deliver==true ? "Yes" : "No" %></strong></div></div>
+        <% } %>
+
+
+
+
+        <% if (typeof(open_24hrs) != "undefined") { %>
+        <div style="display: table-row;"><div style="display: table-cell;" class="amenitiesFirstCol">Open 24 Hours: </div><div style="display: table-cell;"><strong><%= open_24hrs==true ? "Yes" : "No" %></strong></div></div>
+        <% } %>
+
+        <% if (typeof(meal_breakfast) != "undefined") { %>
+        <div style="display: table-row;"><div style="display: table-cell;" class="amenitiesFirstCol">Serves Breakfast: </div><div style="display: table-cell;"><strong><%= meal_breakfast==true ? "Yes" : "No" %></strong></div></div>
+        <% } %>
+
+        <% if (typeof(meal_lunch) != "undefined") { %>
+        <div style="display: table-row;"><div style="display: table-cell;" class="amenitiesFirstCol">Serves Lunch: </div><div style="display: table-cell;"><strong><%= meal_lunch==true ? "Yes" : "No" %></strong></div></div>
+        <% } %>
+
+        <% if (typeof(meal_dinner) != "undefined") { %>
+        <div style="display: table-row;"><div style="display: table-cell;" class="amenitiesFirstCol">Serves Dinner: </div><div style="display: table-cell;"><strong><%= meal_dinner==true ? "Yes" : "No" %></strong></div></div>
+        <% } %>
+
+    </div>
+</div>

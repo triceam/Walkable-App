@@ -1,0 +1,38 @@
+
+    <div class="header gpu">
+        <h1>Search Results</h1>
+    </div>
+
+<div class="gpu" style="background-color: white; margin:0px; padding:0px; padding-bottom: 10px;">
+
+
+    <p style="padding-top:10px; padding-left: 10px; padding-right: 10px;">
+        <% if ((typeof(points) != "undefined") && points.length > 0) { %>
+            <button id="mapView" class="btn btn-info" style="width: 100%;font-size: 2.25em;"><img src="assets/images/usa.png" />&nbsp;&nbsp;&nbsp;View Map</button>
+        <% } %>
+    </p>
+
+
+    <p style="padding-left: 10px; padding-right: 10px; margin:0px; font-size: 1.3em;">
+        Results for search phrase "<span class="searchString"><%= HTMLUtil.encode( searchString ) %></span>"
+        within <strong><% if (walking) { %>a 20 minute walk time<% } else { %>2.5 miles<% } %></strong>
+    </p>
+</div>
+
+<% if ((typeof(points) != "undefined") && points.length > 0) { %>
+    <ul class="data-list" id="list" style="background-color: white; margin:0px; padding:0px; border-bottom: 1px solid #CCC;"></ul>
+<% } else { %>
+    <div style="padding:10px;">
+        <div class="alert alert-error" >
+            No results could be found matching your search criteria.  Please refine your search.
+        </div>
+        <div class="alert alert-info" >
+            Please note: Walking time calculations are only available for subsections of USA states CA, FL, &amp; NY.  Other states may be supported in the future.
+        </div>
+    </div>
+    <div style="padding:25px; text-align: center;">
+        <img src="assets/images/error.png" />
+    </div>
+<% } %>
+
+    <p class="alert alert-info" style="font-weight: bold; text-align: center">Walking time calculations are only available for subsections of USA states CA, FL, &amp; NY.  All other locations will display distance in miles.</p>
