@@ -3,7 +3,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
 
-    console.log( "READY" );
+    //console.log( "READY" );
 
     window.GeoWatcher.watch();
 
@@ -11,7 +11,7 @@ function onDeviceReady() {
 }
 
 function appTemplatesLoaded() {
-    console.log( "VIEW TEMPLATES LOADED" );
+    //console.log( "VIEW TEMPLATES LOADED" );
 
     $("body").empty();
 
@@ -23,20 +23,7 @@ function appTemplatesLoaded() {
     //Setup the ViewNavigator
     window.viewNavigator = new ViewNavigator( 'body' );	
     window.viewNavigator.pushView( homeView );
-
-}
-
-document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-
-/*
-
-
-
-			
-document.addEventListener("deviceready", onDeviceReady, false);
-
-function onDeviceReady() {
-   document.addEventListener("backbutton", onBackKey, false);
+    document.addEventListener("backbutton", onBackKey, false);
 }
 
 function onBackKey( event ) {
@@ -48,5 +35,4 @@ function onBackKey( event ) {
     navigator.app.exitApp();
 }
 
-
-*/
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);

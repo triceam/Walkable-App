@@ -216,17 +216,22 @@ window.MapView = Backbone.View.extend({
 
     openExternalLink:function (event) {
 
-        var target = $( event.target )
-        if (!target.hasClass("maplink")) {
-            var href = target.attr("href");
-            if ( href != "#"  && href.length > 0 ) {
-                NativeUtil.openExternalURL( href );
-                event.stopImmediatePropagation();
-                event.preventDefault();
-                event.cancelBubble();
-                return false;
-            }
-        }
+
+    	if ( !this.lastTimestamp || (new Date().getTime()-this.lastTimestamp) > 500) {
+	    
+	        var target = $( event.target )
+	        if (!target.hasClass("maplink")) {
+	            var href = target.attr("href");
+	            if ( href != "#"  && href.length > 0 ) {
+	                NativeUtil.openExternalURL( href );
+	                event.stopImmediatePropagation();
+	                event.preventDefault();
+	                event.cancelBubble();
+	                return false;
+	            }
+	        }
+	    }
+        this.lastTimestamp = new Date().getTime();
     }
     
 });

@@ -45,6 +45,7 @@ window.GeoWatcher = {
    },
 
    isValidLocation: function() {
+	   
         return  this.position != undefined &&
             !isNaN(this.position.latitude)&&
             !isNaN(this.position.longitude);

@@ -20,10 +20,16 @@ window.AboutView = Backbone.View.extend({
     },
 
     openExternalLink:function (event) {
-
-        var target = $( event.target )
-        var href = target.attr("href");
-        NativeUtil.openExternalURL( href );
+    	
+    	if ( !this.lastTimestamp || (new Date().getTime()-this.lastTimestamp) > 500) {
+	    	
+	        var target = $( event.target )
+	        var href = target.attr("href");
+	        NativeUtil.openExternalURL( href );
+	    }
+        
+        this.lastTimestamp = new Date().getTime();
+        event.stopPropagation();
         event.stopImmediatePropagation();
         event.preventDefault();
         event.cancelBubble();

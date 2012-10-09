@@ -23,17 +23,35 @@ window.HomeView = Backbone.View.extend({
 
         if ( model.isTablet ) {
             this.$el.css("height", "100%");
+            this.$el.css("margin", "0px");
+            this.$el.css("padding", "0px");
             this.$el.find("#homeView").css("height", "100%");
 
+
+            var wrapper = this.$el.find("#wrapper");
+            wrapper.css("margin", "0px");
+            wrapper.css("padding", "0px");
+            
             var well = this.$el.find(".well");
             well.css("width", "460px");
-            well.css("padding", "35px");
+            well.css("margin", "0px");
+            well.css("padding", "30px");
             well.find(".input-append").css("max-width", "101%");
 
             well.css("position", "absolute");
-            var hOffset = ($(window).width() - this.$el.find(".well").width())/2;
+            var hOffset = ($(window).width() - well.width())-70;
+            
+            hOffset = hOffset/2;
+            /*
+            if ( $(window).width() > 700) {
+            	hOffset = hOffset/3;
+            }
+            else {
+            	hOffset = hOffset/4;
+            }*/
+            
             well.css("left", hOffset+"px");
-            well.css("top", "220px");
+            well.css("top", "180px");
         }
 
         this.headerActions = $("<li class='btn btn-inverse' style='padding: 5px 5px;'><i class='icon-info-sign icon-white'></i></li>");
@@ -48,11 +66,14 @@ window.HomeView = Backbone.View.extend({
 
     performSearch:function () {
 
-        var searchString = $("#searchString").val();
-
-        //todo: add error checking?
-        var view = new SearchView( {searchString:searchString} );
-        window.viewNavigator.pushView( view );
+    	if ( !this.lastTimestamp || (new Date().getTime()-this.lastTimestamp) > 500) {
+	        var searchString = $("#searchString").val();
+	
+	        //todo: add error checking?
+	        var view = new SearchView( {searchString:searchString} );
+	        window.viewNavigator.pushView( view );
+    	}
+        this.lastTimestamp = new Date().getTime();
     },
 
     selectCuisine:function () {

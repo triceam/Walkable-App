@@ -49,6 +49,9 @@ NativeUtil = {
         var h = win.height();
         var _w = Math.min( w,h );
         var _h = Math.max( w,h );
+        
+        //alert( _w );
+        //alert( _h );
 
         return (_w > 640 && _h > 960 );
     }
