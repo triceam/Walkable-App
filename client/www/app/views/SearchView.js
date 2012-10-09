@@ -40,19 +40,20 @@ window.SearchView = Backbone.View.extend({
     },
 
     searchResult: function(result) {
+        //console.log(result);
 
         try {
-        var jsonResult = JSON.parse(result);
+            var jsonResult = JSON.parse(result);
 
-        var self = this;
+            var self = this;
 
-        //cleanup once removed from view
-        setTimeout(function(){
-            self.$el.empty();
-        }, 550 );
+            //cleanup once removed from view
+            setTimeout(function(){
+                self.$el.empty();
+            }, 550 );
 
-        var view = new SearchResultsView({ model:jsonResult, searchString:this.searchString });
-        	window.viewNavigator.replaceView( view );
+            var view = new SearchResultsView({ model:jsonResult, searchString:this.searchString });
+            window.viewNavigator.replaceView( view );
         }
         catch(e){
             alert(e.toString())
@@ -60,15 +61,17 @@ window.SearchView = Backbone.View.extend({
     },
 
     searchError: function(error) {
-        //console.log(error);
+       // console.log(error);
 
-        //cleanup once removed from view
+        var self = this;
+
+        //wait for transition to finish, then cleanup once removed from view
         setTimeout(function(){
             self.$el.empty();
-        }, 500 );
 
-        var view = new SearchResultsView({ model:{points:[], polygons:[]}, searchString:this.searchString });
-        window.viewNavigator.replaceView( view );
+            var view = new SearchResultsView({ model:{points:[], polygons:[]}, searchString:this.searchString });
+            window.viewNavigator.replaceView( view );
+        }, 550 );
     }
 
 
