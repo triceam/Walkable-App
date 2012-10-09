@@ -1,14 +1,13 @@
 
 window.SearchManager = {
 
-    //apiUrl:"http://localhost:3000/api?",
-    apiUrl:"http://walkable.aws.af.cm/restaurants-api?",
-
+    apiUrl:"http://localhost:3000/restaurants-api?",
+    
     search:function (searchString, successCallback, errorCallback) {
         var searchURL = this.apiUrl + "q=" + encodeURIComponent(searchString) + "&ll=" + window.GeoWatcher.position.latitude + "," + window.GeoWatcher.position.longitude + "&d=" + new Date().getTime();
 
         $.ajax({
-            timeout:10000,
+            timeout:20000,
             url:searchURL,
             success:function(result){
                 if ( successCallback ) {

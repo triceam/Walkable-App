@@ -44,14 +44,6 @@ window.SearchView = Backbone.View.extend({
 
         try {
             var jsonResult = JSON.parse(result);
-
-            var self = this;
-
-            //cleanup once removed from view
-            setTimeout(function(){
-                self.$el.empty();
-            }, 550 );
-
             var view = new SearchResultsView({ model:jsonResult, searchString:this.searchString });
             window.viewNavigator.replaceView( view );
         }
@@ -62,14 +54,12 @@ window.SearchView = Backbone.View.extend({
 
     searchError: function(error) {
        // console.log(error);
-
         var self = this;
 
         //wait for transition to finish, then cleanup once removed from view
         setTimeout(function(){
-            self.$el.empty();
 
-            var view = new SearchResultsView({ model:{points:[], polygons:[]}, searchString:this.searchString });
+            var view = new SearchResultsView({ model:{points:[], polygons:[]}, searchString:self.searchString });
             window.viewNavigator.replaceView( view );
         }, 550 );
     }
